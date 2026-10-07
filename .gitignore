@@ -1,0 +1,29 @@
+# Secrets et environnement
+.env
+*.pem
+*.key
+
+# Java / Maven / Gradle
+target/
+build/
+.gradle/
+*.class
+*.log
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log

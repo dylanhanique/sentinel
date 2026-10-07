@@ -1,0 +1,51 @@
+# Infrastructure locale de Sentinel : PostgreSQL, RabbitMQ, Mailpit.
+# Les services applicatifs seront ajoutés plus tard.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: sentinel-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD:-postgres}
+      API_DB_PASSWORD: ${API_DB_PASSWORD:-api_pwd}
+      CHECKER_DB_PASSWORD: ${CHECKER_DB_PASSWORD:-checker_pwd}
+      ALERT_DB_PASSWORD: ${ALERT_DB_PASSWORD:-alert_pwd}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: sentinel-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-sentinel}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-sentinel}
+    ports:
+      - "5672:5672" # protocole AMQP (les services)
+      - "15672:15672" # interface web de gestion
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: sentinel-mailpit
+    ports:
+      - "1025:1025" # SMTP (l'alert-service y envoie ses emails)
+      - "8025:8025" # interface web pour lire les emails
+
+volumes:
+  postgres-data:
+  rabbitmq-data:

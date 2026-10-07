@@ -1,0 +1,2 @@
+# Forcer les fins de ligne LF pour les scripts (sinon ils cassent dans Docker sous Windows)
+*.sh text eol=lf
