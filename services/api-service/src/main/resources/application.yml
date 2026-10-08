@@ -1,0 +1,10 @@
+spring:
+  autoconfigure:
+    # TODO(SEN-2.1): Enlever les exclusions lorsque l'API sera prête à être connectée à une base de données
+    exclude:
+      - org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration
+      - org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration
+  application:
+    name: api-service
+server:
+  port: 8081
