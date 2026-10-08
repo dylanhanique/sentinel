@@ -17,9 +17,11 @@ Plateforme de monitoring de sites web : architecture événementielle (Spring Bo
 | [pitfalls.md](pitfalls.md) | Pièges à anticiper |
 | [roadmap.md](roadmap.md) | Planning sur 4 semaines et suivi d'avancement |
 | [adr/](adr/) | Architecture Decision Records (choix justifiés) |
+| [process/](process.md) | Méthode de travail |
 
 ## Conventions
 
+- L'attribution des ports est la suivante : api 8081, checker 8082, alert 8083
 - Les diagrammes sont en **Mermaid** (rendus nativement par GitHub).
 - Les contrats d'événements et l'API sont la **source de vérité** : toute modification passe d'abord par ces documents.
 - Chaque décision structurante donne lieu à un ADR court.
