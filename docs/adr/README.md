@@ -12,3 +12,4 @@ Un ADR documente **une** décision structurante : contexte, décision, conséque
 | [0006](0006-authentification-jwt.md) | Authentification JWT gérée par l'api-service | Accepté |
 | [0007](0007-terraform-plutot-qu-ansible.md) | Terraform pour l'infrastructure, Ansible en bonus | Accepté |
 | [0008](0008-monorepo.md) | Monorepo | Accepté |
+| [0009](0009-maven-plutot-que-gradle.md) | Maven | Accepté |
