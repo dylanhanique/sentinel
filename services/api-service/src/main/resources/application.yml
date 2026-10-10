@@ -1,10 +1,25 @@
 spring:
-  autoconfigure:
-    # TODO(SEN-2.1): Enlever les exclusions lorsque l'API sera prête à être connectée à une base de données
-    exclude:
-      - org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration
-      - org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration
   application:
     name: api-service
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+  datasource:
+    url: ${API_DB_URL:jdbc:postgresql://localhost:5432/api_db}
+
+    # TODO(SEN-10) Compromis : api_user est propriétaire et sert à la fois à Flyway et à l’exécution. Voir SEN-10.
+    username: ${API_DB_USER:api_user}
+    password: ${API_DB_PASSWORD:api_pwd}
+
+management:
+  endpoint:
+    health:
+      show-details: never
+      group:
+        readiness:
+          include: readinessState,db
+
 server:
   port: 8081
