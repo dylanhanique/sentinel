@@ -104,8 +104,8 @@ sequenceDiagram
     participant A as api-service
     participant DB as api_db
     participant Q as RabbitMQ
-    U->>A: DELETE /api/users/me
-    A->>DB: DELETE user (cascade) + INSERT outbox MonitorDeleted x N
+    U->>A: DELETE /api/accounts/me
+    A->>DB: DELETE accounts (cascade) + INSERT outbox MonitorDeleted x N
     A-->>U: 204 No Content
     Note over A,Q: Le relais publie un MonitorDeleted par moniteur
     Q->>Q: checker et alert suppriment leurs copies

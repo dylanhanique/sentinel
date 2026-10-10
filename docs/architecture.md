@@ -32,7 +32,7 @@ flowchart LR
 
 | Service | Responsabilité | Base | Tables |
 |---|---|---|---|
-| **api-service** | API REST pour Angular, authentification, CRUD moniteurs, calcul des métriques | `api_db` | `user`, `monitor`, `check_result`, `incident`, `outbox_event` |
+| **api-service** | API REST pour Angular, authentification, CRUD moniteurs, calcul des métriques | `api_db` | `account`, `monitor`, `check_result`, `incident`, `outbox_event` |
 | **checker-service** | Planifie et exécute les vérifications HTTP. Stateless, scalable horizontalement | `checker_db` | `monitor_to_check` (+ `outbox_event` si besoin) |
 | **alert-service** | Seul décideur de l'état d'un moniteur. Compte les échecs, ouvre et ferme les incidents, envoie les emails | `alert_db` | `monitor_state`, `incident`, `processed_check`, `outbox_event` |
 
@@ -54,7 +54,7 @@ flowchart LR
 
 | Domaine | Choix |
 |---|---|
-| Backend | Java 21, Spring Boot 3 (Web, Data JPA, Security, AMQP, Actuator), Flyway |
+| Backend | Java 21, Spring Boot 4.1.1 (Web, Data JPA, Security, AMQP, Actuator), Flyway |
 | Messagerie | RabbitMQ (retries + dead-letter queues) |
 | Base de données | PostgreSQL |
 | Frontend | Angular (standalone components), ngx-charts ou Chart.js |

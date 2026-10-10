@@ -31,7 +31,7 @@ Hors périmètre         : ce qu'on ne fait pas ici
 
 - `main` est toujours stable : aucun push direct.
 - Une branche par ticket : `feature/SEN-2-database-flyway`.
-- Commits au format **Conventional Commits** : `feat(api): add user registration (SEN-4)`. Types : `feat`, `fix`, `docs`, `test`, `chore`, `refactor`.
+- Commits au format **Conventional Commits** : `feat(api): add account registration (SEN-4)`. Types : `feat`, `fix`, `docs`, `test`, `chore`, `refactor`.
 - Une Pull Request par ticket, relue par son auteur avant de demander une review.
 - Fusion en **Squash and merge** : un commit sur `main` par ticket. Le titre de la PR devient le message du commit, sans point final.
 - Branche supprimée après le merge.

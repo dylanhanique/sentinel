@@ -8,8 +8,8 @@ Base : `/api`. Authentification par `Authorization: Bearer <JWT>` sauf `register
 |---|---|---|---|
 | POST | `/api/auth/register` | Créer un compte `{email, password}` | 201, 400, 409 (email déjà pris) |
 | POST | `/api/auth/login` | Se connecter | 200 `{accessToken, expiresIn}`, 401 |
-| GET | `/api/users/me` | Profil de l'utilisateur connecté | 200 |
-| DELETE | `/api/users/me` | Supprimer son compte (cascade) | 204 |
+| GET | `/api/accounts/me` | Profil de l'utilisateur connecté | 200 |
+| DELETE | `/api/accounts/me` | Supprimer son compte (cascade) | 204 |
 
 ## Moniteurs
 
@@ -116,7 +116,7 @@ Protégé par une NetworkPolicy Kubernetes et un token partagé (secret).
 
 - **Validation** : voir [use-cases.md](use-cases.md) (contraintes des champs).
 - **Contrôle d'accès** : une ressource d'un autre utilisateur renvoie **404**, jamais 403.
-- **Erreurs** : format `application/problem+json` (`ProblemDetail` de Spring Boot 3).
+- **Erreurs** : format `application/problem+json` (`ProblemDetail` de Spring Boot 4.1.1).
 - **Mot de passe** : minimum 10 caractères, haché avec BCrypt, jamais renvoyé ni journalisé.
 - **JWT** : signé (HS256 avec secret externalisé, ou RS256), durée de vie courte.
 - **CORS** : limité à l'origine du front.

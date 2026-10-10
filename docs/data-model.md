@@ -6,19 +6,19 @@ Chaque service possède sa base. Les schémas sont versionnés avec **Flyway** (
 
 ```mermaid
 erDiagram
-    USER ||--o{ MONITOR : possede
+    account ||--o{ MONITOR : possede
     MONITOR ||--o{ CHECK_RESULT : produit
     MONITOR ||--o{ INCIDENT : historise
 
-    USER {
+    account {
         uuid id PK
-        string email UK
+        citext email UK
         string password_hash
         timestamp created_at
     }
     MONITOR {
         uuid id PK
-        uuid user_id FK
+        uuid account_id FK
         string name
         string url
         int interval_seconds
@@ -111,3 +111,4 @@ erDiagram
 - **Index de planification (checker)** : `CREATE INDEX ON monitor_to_check (next_check_at) WHERE active`.
 - **Purge d'`outbox_event`** : suppression des lignes publiées depuis plus de 7 jours.
 - **Suppression de compte** : `ON DELETE CASCADE` sur `monitor`, `check_result` et `incident`, et un `MonitorDeleted` publié par moniteur.
+- **Unicité des emails** : type citext pour garantir une insensibilité à la casse.
